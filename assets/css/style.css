@@ -17,6 +17,17 @@
   --shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg-color: #121212;
+    --text-color: #eee;
+    --link-color: #4dabf7;
+    --card-bg: #1e1e1e;
+    --border-color: #2c2c2c;
+    --footer-color: #999;
+  }
+}
+
 /* ===== BASE STYLES ===== */
 body {
   font-family: var(--font-body);
@@ -31,6 +42,7 @@ body {
 a {
   color: var(--primary-color);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 a:hover {
   text-decoration: underline;
@@ -40,6 +52,7 @@ h1, h2, h3 {
   font-family: var(--font-heading);
   margin-bottom: 0.5rem;
   color: var(--primary-color);
+  transition: color 0.3s ease;
 }
 
 p {
@@ -62,9 +75,9 @@ nav a {
   font-weight: 500;
 }
 
-nav a:last-child {
+/*nav a:last-child {
   margin-right: 0;
-}
+}*/
 
 /* ===== FOOTER ===== */
 footer {
@@ -73,6 +86,7 @@ footer {
   font-size: 0.875rem;
   color: #666;
   border-top: 1px solid #eaeaea;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 /* ===== BUTTON STYLE EXAMPLE ===== */
@@ -98,6 +112,7 @@ footer {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ===== RESPONSIVE ===== */
