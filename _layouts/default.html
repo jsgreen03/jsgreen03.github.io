@@ -11,5 +11,26 @@
   </main>
 
   {% include footer.html %}
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('toggle-dark-mode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+      document.documentElement.dataset.theme = savedTheme;
+    } else if (prefersDark) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+
+    btn.onclick = function () {
+      const current = document.documentElement.dataset.theme;
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('theme', next);
+    };
+  });
+</script>
 </body>
 </html>
