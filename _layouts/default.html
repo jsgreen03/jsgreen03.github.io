@@ -15,22 +15,22 @@
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('toggle-dark-mode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const html = document.documentElement;
+    
     const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme) {
-      document.documentElement.dataset.theme = savedTheme;
-    } else if (prefersDark) {
-      document.documentElement.dataset.theme = 'dark';
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      html.setAttribute('data-theme', savedTheme);
     }
 
-    btn.onclick = function () {
-      const current = document.documentElement.dataset.theme;
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      localStorage.setItem('theme', next);
-    };
+    if (btn) {
+	    btn.onclick = function () {
+	      const current = html.getAttribute('data-theme');
+	      const next = current === 'dark' ? 'light' : 'dark';
+	      html.setAttribute('data-theme', next);
+	      localStorage.setItem('theme', next);
+	    };
+	}
   });
-</script>
+  </script>
 </body>
 </html>
