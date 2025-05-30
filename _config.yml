@@ -1,3 +1,13 @@
-title: Jaxon Green's GitHub Page
+title: Jaxon Green
 description: A digital porfolio that showcases some of the projects I have worked on!
+include:
+  - assets
 markdown: kramdown
+theme: null
+
+kramdown:
+  input: Kramdown
+  hard_wrap: false
+  auto_ids: true
+  parse_block_html: true
+  syntax_highlighter: rouge

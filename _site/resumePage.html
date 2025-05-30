@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% include head.html %}
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume | Jaxon Green's GitHub Page</title>
+<link rel="stylesheet" href="/assets/css/style.css?v=1748645732">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
-    {% include header.html %}
+    <header class="fade-up">
+  <h1 class="site-title"><a href="/">Jaxon Green's GitHub Page</a></h1>
+  <p class="site-subtitle">Data Scientist</p>
+  <nav>
+    <a class="button" href="/">Home</a>
+    <a class="button" href="/about">About Me</a>
+    <a class="button" href="/projects">Projects</a>
+    <a class="button" href="/resumePage">Resume</a>
+  </nav>
+  <button id="toggle-dark-mode" class="button" style="float: right;">Toggle Light/Dark Mode</button>
+</header>
 
     <main>
       
-        {{ content }}
+        <h1 id="insert-resume-here">Insert Resume Here</h1>
+
 
     </main>
 
-    {% include footer.html %}
+    <footer class="fade-up">
+  <p>&copy; 2025 Jaxon Green's GitHub Page. All rights reserved.</p>
+</footer>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {

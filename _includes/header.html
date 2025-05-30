@@ -1,8 +1,11 @@
-<header>
-  <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+<header class="fade-up">
+  <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+  <p class="site-subtitle">Data Scientist</p>
   <nav>
-    <a href="{{ '/' | relative_url }}">Home</a> |
-    <a href="{{ '/about' | relative_url }}">About</a>
+    <a class="button" href="{{ '/' | relative_url }}">Home</a>
+    <a class="button" href="{{ '/about' | relative_url }}">About Me</a>
+    <a class="button" href="{{ '/projects' | relative_url }}">Projects</a>
+    <a class="button" href="{{ '/resumePage' | relative_url }}">Resume</a>
   </nav>
   <button id="toggle-dark-mode" class="button" style="float: right;">Toggle Light/Dark Mode</button>
 </header>

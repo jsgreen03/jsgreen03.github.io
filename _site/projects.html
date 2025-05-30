@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Jaxon Green's GitHub Page</title>
+<link rel="stylesheet" href="/assets/css/style.css?v=1748645732">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <header class="fade-up">
+  <h1 class="site-title"><a href="/">Jaxon Green's GitHub Page</a></h1>
+  <p class="site-subtitle">Data Scientist</p>
+  <nav>
+    <a class="button" href="/">Home</a>
+    <a class="button" href="/about">About Me</a>
+    <a class="button" href="/projects">Projects</a>
+    <a class="button" href="/resumePage">Resume</a>
+  </nav>
+  <button id="toggle-dark-mode" class="button" style="float: right;">Toggle Light/Dark Mode</button>
+</header>
+
+    <main>
+      
+        <h1 class="fade-up" id="my-projects">My Projects</h1>
+
+<h2 class="fade-up" id="data-science">Data Science</h2>
+
+<h2 class="fade-up" id="biology">Biology</h2>
+
+<h2 class="fade-up" id="finance">Finance</h2>
+
+
+
+    </main>
+
+    <footer class="fade-up">
+  <p>&copy; 2025 Jaxon Green's GitHub Page. All rights reserved.</p>
+</footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('toggle-dark-mode');
+        const html = document.documentElement;
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          html.setAttribute('data-theme', savedTheme);
+        }
+
+        if (btn) {
+    	    btn.onclick = function () {
+    	      const current = html.getAttribute('data-theme');
+    	      const next = current === 'dark' ? 'light' : 'dark';
+    	      html.setAttribute('data-theme', next);
+    	      localStorage.setItem('theme', next);
+    	    };
+    	}
+      });
+      document.addEventListener('DOMContentLoaded', () => {
+        const fadeUps = document.querySelectorAll('.fade-up');
+        fadeUps.forEach((el, index) => {
+          el.style.setProperty('--delay', `${index * 0.2}s`);
+        });
+      });
+    </script>
+
+
+
+</body>
+</html>
