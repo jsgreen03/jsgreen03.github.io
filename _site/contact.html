@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Jaxon Green</title>
+<link rel="stylesheet" href="/assets/css/style.css?v=1749171585">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+
+  </head>
+  <body>
+
+      <!-- <img src="/assets/images/BigSur5.png" alt="Big Sur 5" class="background-image" /> -->
+    <div class="background-container" id="background-container"></div>
+
+    <div class="content-wrapper" id="content-wrapper">
+      <header class="site-header" id="site-header">
+  <div class="header-content">
+    <div class="header-grid">
+      <div class="title-wrapper">
+        <h1 class="site-title"><a href="/">Jaxon Green</a></h1>
+        <p class="site-subtitle">Data Scientist | Mathematician | Researcher</p>      
+      </div>
+      <!-- <div class="subtitle-nav-row"> -->
+      <nav class ="site-nav">
+        <a href="/">Home</a>
+        <a href="/about">About Me</a>
+        <a href="/projects">Projects</a>
+        <a href="/resumePage">Resume</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <!-- </div> -->
+  </div>
+
+</header>
+      <main class="content">
+          <h1 id="email-jaxonsgreengmailcom">Email: jaxonsgreen@gmail.com</h1>
+
+      </main>
+      <footer class="fade-up" id="site-footer">
+  <div class="footer-content">
+    <p>Location: Big Sur, CA</p>
+    <button id="toggle-dark-mode" class="button" style="float: right;">Toggle Light/Dark Mode</button>
+  </div>
+</footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('toggle-dark-mode');
+        const html = document.documentElement;
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          html.setAttribute('data-theme', savedTheme);
+        }
+
+        if (btn) {
+    	    btn.onclick = function () {
+    	      const current = html.getAttribute('data-theme');
+    	      const next = current === 'dark' ? 'light' : 'dark';
+    	      html.setAttribute('data-theme', next);
+    	      localStorage.setItem('theme', next);
+    	    };
+    	}
+      });
+      document.addEventListener('DOMContentLoaded', () => {
+        const fadeUps = document.querySelectorAll('.fade-up');
+        fadeUps.forEach((el, index) => {
+          el.style.setProperty('--delay', `${index * 0.2}s`);
+        });
+      });
+      window.addEventListener('scroll', () => {
+        const content = document.getElementById('content-wrapper');
+        const bg = document.getElementById('background-container');
+
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const bgHeight = bg.offsetHeight - window.innerHeight;
+
+        const progress = scrollTop / docHeight;
+        const parallaxY = progress * bgHeight;
+
+        bg.style.transform = `translateY(-${parallaxY}px)`;
+      });
+    </script>
+    <script>
+      window.addEventListener("scroll", () => {
+        document.body.classList.toggle("scrolled", window.scrollY > 10);
+      });
+    </script>
+    <script>
+      function adjustBackgroundHeight() {
+        const overlay = document.querySelector('.overlay-content');
+        const background = document.querySelector('.background-section');
+        const image = document.querySelector('.background-image');
+        const footer = document.querySelector('footer');
+
+        if (!overlay || !background || !image || !footer) return;
+
+        const overlayHeight = overlay.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        const imageHeight = image.offsetHeight;
+
+        const totalNeededHeight = overlayHeight + footerHeight;
+
+        background.style.minHeight = Math.max(imageHeight, totalNeededHeight) + 'px';
+      }
+
+      window.addEventListener('load', adjustBackgroundHeight);
+      window.addEventListener('resize', adjustBackgroundHeight);
+    </script>
+    <script>
+      function setBackgroundOffset() {
+        const header = document.getElementById('site-header');
+        const background = document.getElementById('background-container');
+
+        if (header && background) {
+          const headerHeight = header.offsetHeight;
+          background.style.top = headerHeight + 'px';
+        }
+      }
+
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          setBackgroundOffset();
+          document.body.classList.add('ready');
+        });
+      });
+      window.addEventListener('resize', setBackgroundOffset);
+    </script>
+
+
+
+  </body>
+</html>

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {% include head.html %}
-</head>
-<body>
-    {% include header.html %}
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
 
-    <main>
-      
-        {{ content }}
+      <!-- <img src="/assets/images/BigSur5.png" alt="Big Sur 5" class="background-image" /> -->
+    <div class="background-container" id="background-container"></div>
 
-    </main>
-
-    {% include footer.html %}
+    <div class="content-wrapper" id="content-wrapper">
+      {% include header.html %}
+      <main class="content">
+          {{ content }}
+      </main>
+      {% include footer.html %}
+    </div>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -39,9 +41,67 @@
           el.style.setProperty('--delay', `${index * 0.2}s`);
         });
       });
+      window.addEventListener('scroll', () => {
+        const content = document.getElementById('content-wrapper');
+        const bg = document.getElementById('background-container');
+
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const bgHeight = bg.offsetHeight - window.innerHeight;
+
+        const progress = scrollTop / docHeight;
+        const parallaxY = progress * bgHeight;
+
+        bg.style.transform = `translateY(-${parallaxY}px)`;
+      });
+    </script>
+    <script>
+      window.addEventListener("scroll", () => {
+        document.body.classList.toggle("scrolled", window.scrollY > 10);
+      });
+    </script>
+    <script>
+      function adjustBackgroundHeight() {
+        const overlay = document.querySelector('.overlay-content');
+        const background = document.querySelector('.background-section');
+        const image = document.querySelector('.background-image');
+        const footer = document.querySelector('footer');
+
+        if (!overlay || !background || !image || !footer) return;
+
+        const overlayHeight = overlay.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        const imageHeight = image.offsetHeight;
+
+        const totalNeededHeight = overlayHeight + footerHeight;
+
+        background.style.minHeight = Math.max(imageHeight, totalNeededHeight) + 'px';
+      }
+
+      window.addEventListener('load', adjustBackgroundHeight);
+      window.addEventListener('resize', adjustBackgroundHeight);
+    </script>
+    <script>
+      function setBackgroundOffset() {
+        const header = document.getElementById('site-header');
+        const background = document.getElementById('background-container');
+
+        if (header && background) {
+          const headerHeight = header.offsetHeight;
+          background.style.top = headerHeight + 'px';
+        }
+      }
+
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          setBackgroundOffset();
+          document.body.classList.add('ready');
+        });
+      });
+      window.addEventListener('resize', setBackgroundOffset);
     </script>
 
 
 
-</body>
+  </body>
 </html>
