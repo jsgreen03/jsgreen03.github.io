@@ -3,4 +3,4 @@ layout: default
 title: Contact
 ---
 
-# Email: jaxonsgreen@gmail.com
+[Email Me](mailto:jaxonsgreen@green.com){: .email-link .fade-up }

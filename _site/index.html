@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home | Jaxon Green</title>
-<link rel="stylesheet" href="/assets/css/style.css?v=1749171585">
+<link rel="stylesheet" href="/assets/css/style.css?v=1750456915">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 
   </head>
   <body>
-
       <!-- <img src="/assets/images/BigSur5.png" alt="Big Sur 5" class="background-image" /> -->
     <div class="background-container" id="background-container"></div>
-
     <div class="content-wrapper" id="content-wrapper">
       <header class="site-header" id="site-header">
   <div class="header-content">
@@ -24,19 +22,20 @@
         <p class="site-subtitle">Data Scientist | Mathematician | Researcher</p>      
       </div>
       <!-- <div class="subtitle-nav-row"> -->
-      <nav class ="site-nav">
-        <a href="/">Home</a>
-        <a href="/about">About Me</a>
-        <a href="/projects">Projects</a>
-        <a href="/resumePage">Resume</a>
-        <a href="/contact">Contact</a>
+      <nav class="site-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About Me</a>
+        <a href="/projects" class="nav-link">Projects</a>
+        <a href="/resumePage" class="nav-link">Resume</a>
+        <a href="/contact" class="nav-link">Contact</a>
       </nav>
     </div>
     <!-- </div> -->
   </div>
 
 </header>
-      <main class="content">
+
+        <main class="content" id="content">
           <h1 class="fade-up" id="welcome-to-jaxon-greens-github-page">Welcome to Jaxon Green’s GitHub Page</h1>
 
 <p class="fade-up">This is a website that showcases my projects!</p>
@@ -73,64 +72,18 @@
 
 <h1 class="fade-up" id="test-15">Test</h1>
 
-<h1 class="fade-up" id="test-16">Test</h1>
-
-<h1 class="fade-up" id="test-17">Test</h1>
-
-<h1 class="fade-up" id="test-18">Test</h1>
-
-<h1 class="fade-up" id="test-19">Test</h1>
-
-<h1 class="fade-up" id="test-20">Test</h1>
-
-<h1 class="fade-up" id="test-21">Test</h1>
-
-<h1 class="fade-up" id="test-22">Test</h1>
-
-<h1 class="fade-up" id="test-23">Test</h1>
-
-<h1 class="fade-up" id="test-24">Test</h1>
-
-<h1 class="fade-up" id="test-25">Test</h1>
-
-<h1 class="fade-up" id="test-26">Test</h1>
-
-<h1 class="fade-up" id="test-27">Test</h1>
-
-<h1 class="fade-up" id="test-28">Test</h1>
-
-<h1 class="fade-up" id="test-29">Test</h1>
-
-<h1 class="fade-up" id="test-30">Test</h1>
-
-<h1 class="fade-up" id="test-31">Test</h1>
-
-<h1 class="fade-up" id="test-32">Test</h1>
-
-<h1 class="fade-up" id="test-33">Test</h1>
-
-<h1 class="fade-up" id="test-34">Test</h1>
-
-<h1 class="fade-up" id="test-35">Test</h1>
-
-<h1 class="fade-up" id="test-36">Test</h1>
-
-<h1 class="fade-up" id="test-37">Test</h1>
-
-<h1 class="fade-up" id="test-38">Test</h1>
-
-<h1 class="fade-up" id="test-39">Test</h1>
-
-      </main>
-      <footer class="fade-up" id="site-footer">
+        </main>
+        <footer class="fade-up" id="site-footer">
   <div class="footer-content">
     <p>Location: Big Sur, CA</p>
     <button id="toggle-dark-mode" class="button" style="float: right;">Toggle Light/Dark Mode</button>
   </div>
 </footer>
-    </div>
 
+    </div>
     <script>
+
+      //Toggle Light VS Dark Mode
       document.addEventListener('DOMContentLoaded', function () {
         const btn = document.getElementById('toggle-dark-mode');
         const html = document.documentElement;
@@ -147,16 +100,46 @@
     	      html.setAttribute('data-theme', next);
     	      localStorage.setItem('theme', next);
     	    };
-    	}
+      	}
       });
-      document.addEventListener('DOMContentLoaded', () => {
-        const fadeUps = document.querySelectorAll('.fade-up');
-        fadeUps.forEach((el, index) => {
-          el.style.setProperty('--delay', `${index * 0.2}s`);
+
+      // Load Content Asynchronously
+      document.addEventListener('DOMContentLoaded', function () {
+      const links = document.querySelectorAll('a.nav-link');
+        links.forEach(link => {
+          link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const url = link.getAttribute('href');
+            try {
+              const response = await fetch(url);
+              const html = await response.text();
+
+              // Parse the fetched HTML
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, 'text/html');
+
+              // Replace content section
+              const newContent = doc.getElementById('content');
+
+              if (newContent) {
+                document.getElementById('content').innerHTML = newContent.innerHTML;
+                history.pushState(null, '', url); // update URL
+                window.scrollTo(0, 0); // scroll to top
+
+                window.afterContentSwap(); 
+
+              }
+            } catch (err) {
+              console.error('Failed to load page:', err);
+            }
+
+          });
         });
       });
+
+
+      // Parallax
       window.addEventListener('scroll', () => {
-        const content = document.getElementById('content-wrapper');
         const bg = document.getElementById('background-container');
 
         const scrollTop = window.scrollY;
@@ -168,34 +151,11 @@
 
         bg.style.transform = `translateY(-${parallaxY}px)`;
       });
-    </script>
-    <script>
+
       window.addEventListener("scroll", () => {
         document.body.classList.toggle("scrolled", window.scrollY > 10);
       });
-    </script>
-    <script>
-      function adjustBackgroundHeight() {
-        const overlay = document.querySelector('.overlay-content');
-        const background = document.querySelector('.background-section');
-        const image = document.querySelector('.background-image');
-        const footer = document.querySelector('footer');
 
-        if (!overlay || !background || !image || !footer) return;
-
-        const overlayHeight = overlay.offsetHeight;
-        const footerHeight = footer.offsetHeight;
-        const imageHeight = image.offsetHeight;
-
-        const totalNeededHeight = overlayHeight + footerHeight;
-
-        background.style.minHeight = Math.max(imageHeight, totalNeededHeight) + 'px';
-      }
-
-      window.addEventListener('load', adjustBackgroundHeight);
-      window.addEventListener('resize', adjustBackgroundHeight);
-    </script>
-    <script>
       function setBackgroundOffset() {
         const header = document.getElementById('site-header');
         const background = document.getElementById('background-container');
@@ -213,9 +173,62 @@
         });
       });
       window.addEventListener('resize', setBackgroundOffset);
+
+
+      //Fade Ups
+
+      const delayBetween = 200; // ms between each animation
+      let animationQueue = [];
+      let isAnimating = false;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (
+            entry.isIntersecting &&
+            !entry.target.classList.contains('in-view') &&
+            !animationQueue.includes(entry.target)
+          ) {
+            animationQueue.push(entry.target);
+            processQueue();
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      function processQueue() {
+        if (isAnimating || animationQueue.length === 0) return;
+        isAnimating = true;
+
+        const el = animationQueue.shift();
+        el.classList.add('in-view');
+
+        setTimeout(() => {
+          isAnimating = false;
+          processQueue(); // handle next item
+        }, delayBetween);
+      }
+
+      function setupFadeUpQueue() {
+        animationQueue = [];
+        isAnimating = false;
+        const fadeUps = document.querySelectorAll('.fade-up');
+        fadeUps.forEach(el => {
+          // el.classList.remove('in-view'); // reset
+          observer.observe(el);
+        });
+      }
+
+      window.addEventListener('load', setupFadeUpQueue);
+      // window.afterContentSwap = setupFadeUpQueue;
+
+
+
+
+      window.afterContentSwap = () => {
+        setupFadeUpQueue();
+      };
     </script>
-
-
 
   </body>
 </html>
